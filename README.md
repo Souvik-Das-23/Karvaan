@@ -43,6 +43,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
+## 🌐 One-Click Deployment
+
+Deploy Karvaan instantly to **Vercel** with zero configuration:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FSouvik-Das-23%2FKarvaan)
+
+### Manual Deployment on Vercel:
+1. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+2. Select your repository: `Souvik-Das-23/Karvaan`.
+3. Framework preset will automatically detect **Next.js**.
+4. (Optional) Add environment variables from `.env.example`:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+5. Click **Deploy**.
+
+---
+
 ## 🗄️ Database Migrations
 
 PostgreSQL schemas and seed datasets are located in:

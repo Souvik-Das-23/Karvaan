@@ -1,6 +1,6 @@
-# 🎒 WanderMatch — Tinder for Group Travel Budgeting
+# 🎒 Karvaan — Tinder for Group Travel Budgeting
 
-**WanderMatch** is a travel matchmaking and group budgeting web application designed for adventurous travelers, trekkers, and backpackers to form vetted travel squads, split shared group kitties, and build trusted travel reputations through peer-reviewed **Vibe Scores** and community badges.
+**Karvaan** is a travel matchmaking and group budgeting web application designed for adventurous travelers, trekkers, and backpackers to form vetted travel squads, split shared group kitties, and build trusted travel reputations through peer-reviewed **Vibe Scores** and community badges.
 
 ---
 

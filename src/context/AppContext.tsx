@@ -33,11 +33,11 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  CURRENT_USER: 'wandermatch_current_user_v1',
-  PROFILES: 'wandermatch_profiles_v1',
-  TRIPS: 'wandermatch_trips_v1',
-  SWIPES: 'wandermatch_swipes_v1',
-  REVIEWS: 'wandermatch_reviews_v1',
+  CURRENT_USER: 'karvaan_current_user_v1',
+  PROFILES: 'karvaan_profiles_v1',
+  TRIPS: 'karvaan_trips_v1',
+  SWIPES: 'karvaan_swipes_v1',
+  REVIEWS: 'karvaan_reviews_v1',
 };
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

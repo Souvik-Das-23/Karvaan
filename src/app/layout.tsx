@@ -17,10 +17,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: 'WanderMatch | Tinder for Group Travel Budgeting',
+  title: 'Karvaan | Tinder for Group Travel Budgeting',
   description:
-    'Match with vetted travelers based on budget compatibility, travel style, and peer-reviewed Vibe Scores. Form your dream travel squad.',
+    'Match with vetted travelers based on budget compatibility, travel style, and peer-reviewed Vibe Scores. Form your dream travel squad on Karvaan.',
   keywords: [
+    'karvaan',
     'group travel',
     'travel matchmaking',
     'budget travel',

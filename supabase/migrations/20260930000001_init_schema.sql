@@ -1,5 +1,5 @@
 -- =================================================================================
--- WanderMatch: Tinder for Group Travel Budgeting
+-- Karvaan: Tinder for Group Travel Budgeting
 -- Complete PostgreSQL / Supabase Schema with RLS, Constraints, and Vibe Score Triggers
 -- =================================================================================
 

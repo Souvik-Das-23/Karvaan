@@ -36,7 +36,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div>
             <span className="text-xl font-black tracking-tight text-gray-900 font-display flex items-center">
-              Wander<span className="text-terracotta-600">Match</span>
+              Kar<span className="text-terracotta-600">vaan</span>
             </span>
             <span className="block text-[10px] uppercase font-extrabold tracking-wider text-gray-500 -mt-1">
               Group Travel Budgeting

@@ -38,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${outfit.variable}`}>
-      <body className="min-h-screen bg-slate-50 text-gray-900 antialiased canvas-bg selection:bg-terracotta-100 selection:text-terracotta-900 pb-20 md:pb-0">
+    <html lang="en" className={`${jakarta.variable} ${outfit.variable} dark`}>
+      <body className="min-h-screen bg-cinema-950 text-cinema-100 antialiased cinematic-bg selection:bg-terracotta-500/30 selection:text-white pb-20 md:pb-0">
         <AppProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />

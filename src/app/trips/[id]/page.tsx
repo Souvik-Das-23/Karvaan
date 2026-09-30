@@ -30,13 +30,13 @@ export default function TripDetailPage() {
   if (!trip) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Trip Not Found</h2>
-        <p className="text-gray-500 text-sm mb-6">
+        <h2 className="text-2xl font-bold text-white mb-2">Trip Not Found</h2>
+        <p className="text-cinema-400 text-sm mb-6">
           The requested trip plan could not be located or has been archived.
         </p>
         <button
           onClick={() => router.push('/')}
-          className="rounded-2xl bg-terracotta-700 px-6 py-3 text-sm font-bold text-white shadow-glow"
+          className="rounded-2xl bg-terracotta-600 px-6 py-3 text-sm font-bold text-white shadow-glow"
         >
           Return to Discover
         </button>
@@ -57,7 +57,7 @@ export default function TripDetailPage() {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#c2410c', '#10b981', '#047857', '#d97706'],
+        colors: ['#ea580c', '#10b981', '#f59e0b', '#d97706'],
       });
     } catch {
       // ignore
@@ -70,35 +70,35 @@ export default function TripDetailPage() {
       {/* Back Button */}
       <button
         onClick={() => router.back()}
-        className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors"
+        className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-cinema-400 hover:text-white transition-colors"
       >
         <ArrowLeft size={16} /> Back to Discover
       </button>
 
       {/* Hero Card */}
-      <div className="relative overflow-hidden rounded-3xl sm:rounded-4xl border border-stone-200 bg-white shadow-card">
-        <div className="relative h-72 sm:h-96 w-full bg-stone-100">
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-white/12 bg-cinema-900 shadow-card-cinematic">
+        <div className="relative h-72 sm:h-96 w-full bg-cinema-950">
           <Image
             src={trip.cover_image}
             alt={trip.title}
             fill
-            className="object-cover brightness-[0.92]"
+            className="object-cover brightness-[0.88] contrast-[1.05]"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-cinema-950 via-cinema-950/30 to-black/50" />
 
           {/* Badges */}
           <div className="absolute top-4 left-4 flex gap-2">
-            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase text-gray-900 backdrop-blur-md border border-white/40 shadow-subtle">
+            <span className="rounded-full bg-black/60 px-3 py-1 text-xs font-bold uppercase text-white backdrop-blur-xl border border-white/10 shadow-lg">
               {trip.travel_style}
             </span>
-            <span className="rounded-full bg-terracotta-700 px-3 py-1 text-xs font-bold text-white shadow-glow">
+            <span className="rounded-full bg-terracotta-600 px-3 py-1 text-xs font-bold text-white shadow-glow">
               Min {trip.min_vibe_score.toFixed(1)} Vibe
             </span>
           </div>
 
           <div className="absolute bottom-6 left-6 right-6 text-white">
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-terracotta-200 mb-1">
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-terracotta-400 mb-1">
               <MapPin size={16} />
               <span>{trip.destination}</span>
             </div>
@@ -109,27 +109,27 @@ export default function TripDetailPage() {
         </div>
 
         {/* Info Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 sm:p-6 bg-stone-50 border-t border-stone-200">
-          <div className="p-3.5 rounded-2xl bg-white border border-stone-200 shadow-subtle">
-            <span className="text-[11px] font-bold text-gray-400 uppercase">Estimated Budget</span>
-            <div className="text-lg font-black text-forest-700 mt-0.5 font-display">{formatINR(trip.budget_per_person)}</div>
-            <span className="text-[10px] text-gray-500">Per person</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 sm:p-6 bg-cinema-950/70 border-t border-white/10">
+          <div className="p-3.5 rounded-2xl bg-cinema-850/80 border border-white/10 shadow-glass">
+            <span className="text-[11px] font-bold text-cinema-400 uppercase">Estimated Budget</span>
+            <div className="text-lg font-black text-emerald-400 mt-0.5 font-display">{formatINR(trip.budget_per_person)}</div>
+            <span className="text-[10px] text-cinema-400">Per person</span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white border border-stone-200 shadow-subtle">
-            <span className="text-[11px] font-bold text-gray-400 uppercase">Travel Dates</span>
-            <div className="text-xs font-bold text-gray-900 mt-1 line-clamp-1">{formatDateRange(trip.start_date, trip.end_date)}</div>
+          <div className="p-3.5 rounded-2xl bg-cinema-850/80 border border-white/10 shadow-glass">
+            <span className="text-[11px] font-bold text-cinema-400 uppercase">Travel Dates</span>
+            <div className="text-xs font-bold text-white mt-1 line-clamp-1">{formatDateRange(trip.start_date, trip.end_date)}</div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white border border-stone-200 shadow-subtle">
-            <span className="text-[11px] font-bold text-gray-400 uppercase">Squad Capacity</span>
-            <div className="text-base font-extrabold text-terracotta-700 mt-0.5">{spotsFilled} / {trip.max_members} Filled</div>
-            <span className="text-[10px] text-forest-700 font-bold">{spotsLeft} spots remaining</span>
+          <div className="p-3.5 rounded-2xl bg-cinema-850/80 border border-white/10 shadow-glass">
+            <span className="text-[11px] font-bold text-cinema-400 uppercase">Squad Capacity</span>
+            <div className="text-base font-extrabold text-terracotta-400 mt-0.5">{spotsFilled} / {trip.max_members} Filled</div>
+            <span className="text-[10px] text-emerald-400 font-bold">{spotsLeft} spots remaining</span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white border border-stone-200 shadow-subtle">
-            <span className="text-[11px] font-bold text-gray-400 uppercase">Trip Lead</span>
-            <div className="text-xs font-bold text-gray-900 mt-1 truncate">{hostProfile?.full_name || 'Trip Host'}</div>
+          <div className="p-3.5 rounded-2xl bg-cinema-850/80 border border-white/10 shadow-glass">
+            <span className="text-[11px] font-bold text-cinema-400 uppercase">Trip Lead</span>
+            <div className="text-xs font-bold text-white mt-1 truncate">{hostProfile?.full_name || 'Trip Host'}</div>
             {hostProfile && <VibeScorePill score={hostProfile.vibe_score} size="sm" showIcon={false} />}
           </div>
         </div>
@@ -138,30 +138,30 @@ export default function TripDetailPage() {
       {/* Description & Itinerary */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-3">
-            <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+          <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-3">
+            <h2 className="text-xs font-bold text-cinema-400 uppercase tracking-wider">
               Expedition Details & Rules
             </h2>
-            <p className="text-sm sm:text-base leading-relaxed text-gray-700">
+            <p className="text-sm sm:text-base leading-relaxed text-cinema-200">
               {trip.description}
             </p>
           </div>
 
           {trip.itinerary_highlights && trip.itinerary_highlights.length > 0 && (
-            <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-4">
-              <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Sparkles size={16} className="text-amber-500" /> Key Itinerary Highlights
+            <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-4">
+              <h2 className="text-xs font-bold text-cinema-400 uppercase tracking-wider flex items-center gap-2">
+                <Sparkles size={16} className="text-amber-400" /> Key Itinerary Highlights
               </h2>
               <div className="space-y-2.5">
                 {trip.itinerary_highlights.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-3.5"
+                    className="flex items-start gap-3 rounded-2xl border border-white/5 bg-cinema-950/60 p-3.5"
                   >
-                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-terracotta-100 text-terracotta-700 text-xs font-bold">
+                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-terracotta-500/20 text-terracotta-400 text-xs font-bold">
                       {idx + 1}
                     </span>
-                    <span className="text-xs sm:text-sm text-gray-800 font-medium">{item}</span>
+                    <span className="text-xs sm:text-sm text-cinema-100 font-medium">{item}</span>
                   </div>
                 ))}
               </div>
@@ -171,9 +171,9 @@ export default function TripDetailPage() {
 
         {/* Confirmed Squad Sidebar */}
         <div className="space-y-6">
-          <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 shadow-card space-y-4">
-            <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-              <Users size={16} className="text-terracotta-600" /> Squad Roster ({spotsFilled}/{trip.max_members})
+          <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 shadow-glass backdrop-blur-2xl space-y-4">
+            <h2 className="text-xs font-bold text-cinema-400 uppercase tracking-wider flex items-center gap-2">
+              <Users size={16} className="text-terracotta-400" /> Squad Roster ({spotsFilled}/{trip.max_members})
             </h2>
 
             <div className="space-y-3">
@@ -184,7 +184,7 @@ export default function TripDetailPage() {
                 return (
                   <div
                     key={member.id}
-                    className="flex items-center justify-between gap-3 rounded-2xl border border-stone-100 bg-stone-50 p-3"
+                    className="flex items-center justify-between gap-3 rounded-2xl border border-white/5 bg-cinema-950/70 p-3"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-terracotta-400/40 flex-shrink-0">
@@ -196,10 +196,10 @@ export default function TripDetailPage() {
                         />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-xs font-bold text-gray-900 truncate">
+                        <div className="text-xs font-bold text-white truncate">
                           {profile.full_name}
                         </div>
-                        <div className="text-[10px] text-gray-400">
+                        <div className="text-[10px] text-cinema-400">
                           {member.role === 'host' ? 'Host' : 'Member'}
                         </div>
                       </div>
@@ -214,11 +214,11 @@ export default function TripDetailPage() {
             {/* Action buttons */}
             <div className="pt-2">
               {isHost ? (
-                <div className="text-xs font-bold text-terracotta-700 bg-terracotta-50 p-3 rounded-2xl border border-terracotta-200 text-center">
+                <div className="text-xs font-bold text-terracotta-400 bg-terracotta-500/10 p-3 rounded-2xl border border-terracotta-500/20 text-center">
                   You are the host of this trip
                 </div>
               ) : isMember ? (
-                <div className="text-xs font-bold text-forest-700 bg-forest-50 p-3 rounded-2xl border border-forest-200 text-center flex items-center justify-center gap-1.5">
+                <div className="text-xs font-bold text-emerald-400 bg-emerald-500/10 p-3 rounded-2xl border border-emerald-500/20 text-center flex items-center justify-center gap-1.5">
                   <CheckCircle2 size={16} /> You're in this Squad!
                 </div>
               ) : (

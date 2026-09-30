@@ -2,12 +2,28 @@
 
 import React, { useState, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Heart, X, RotateCcw, Info, Sparkles, Filter, Plus, Compass } from 'lucide-react';
+import {
+  Heart,
+  X,
+  RotateCcw,
+  Info,
+  Sparkles,
+  Filter,
+  Plus,
+  Compass,
+  DollarSign,
+  Users,
+  ShieldCheck,
+  Calendar,
+  Mountain,
+  SlidersHorizontal,
+} from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { Trip } from '@/lib/types';
 import { SwipeCard } from './SwipeCard';
 import { TripDetailsModal } from './TripDetailsModal';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { formatINR } from '@/lib/utils';
 import confetti from 'canvas-confetti';
 import Link from 'next/link';
 
@@ -15,22 +31,18 @@ export const SwipeFeed: React.FC = () => {
   const { trips, swipes, swipeTrip, currentUser } = useApp();
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [selectedStyle, setSelectedStyle] = useState<string>('All');
-  const { width, isMobile } = useWindowSize();
+  const { width } = useWindowSize();
 
-  // Dynamic drag constraint bounds based on window width
   const dragBoundsWidth = useMemo(() => {
     if (typeof window === 'undefined') return 360;
     return Math.min(width * 0.45, 400);
   }, [width]);
 
-  // Filter available trips for current user
   const availableTrips = useMemo(() => {
     return trips.filter((trip) => {
-      // Style filter
       if (selectedStyle !== 'All' && trip.travel_style !== selectedStyle) {
         return false;
       }
-      // Check if already swiped by current user
       const alreadySwiped = swipes.some(
         (s) => s.trip_id === trip.id && s.user_id === currentUser.id
       );
@@ -47,7 +59,7 @@ export const SwipeFeed: React.FC = () => {
         particleCount: 75,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#c2410c', '#10b981', '#047857', '#d97706', '#f43f5e'],
+        colors: ['#ea580c', '#10b981', '#f59e0b', '#d97706', '#f43f5e'],
       });
     } catch {
       // ignore
@@ -68,27 +80,26 @@ export const SwipeFeed: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto py-1 sm:py-2">
-      {/* Travel Style Filter Chips */}
-      <div className="w-full flex items-center gap-1.5 overflow-x-auto pb-3 mb-2 scrollbar-none px-1">
-        <span className="text-xs font-bold text-gray-500 flex items-center gap-1 pl-1 flex-shrink-0">
-          <Filter size={12} /> Style:
-        </span>
-        {travelStyles.map((style) => (
-          <button
-            key={style}
-            onClick={() => setSelectedStyle(style)}
-            className={`flex-shrink-0 rounded-full px-3.5 py-1 text-xs font-bold transition-all ${
-              selectedStyle === style
-                ? 'bg-terracotta-700 text-white shadow-glow'
-                : 'bg-white text-gray-600 hover:text-gray-900 border border-stone-200 shadow-subtle'
-            }`}
-          >
-            {style}
-          </button>
-        ))}
+      {/* Top Travel Style Chips */}
+      <div className="w-full flex items-center justify-between gap-1.5 overflow-x-auto pb-3 mb-2 scrollbar-none px-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+          {travelStyles.map((style) => (
+            <button
+              key={style}
+              onClick={() => setSelectedStyle(style)}
+              className={`flex-shrink-0 rounded-full px-3.5 py-1 text-xs font-bold transition-all ${
+                selectedStyle === style
+                  ? 'bg-cinema-100 text-cinema-950 shadow-lg'
+                  : 'bg-cinema-850/80 text-cinema-400 hover:text-white border border-white/10'
+              }`}
+            >
+              {style}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Swipe Deck Container (80% height on mobile, fixed height on desktop) */}
+      {/* Main Swipe Deck Container */}
       <div className="relative h-[72vh] max-h-[580px] min-h-[500px] sm:h-[570px] w-full">
         <AnimatePresence>
           {activeDeck.length > 0 ? (
@@ -102,33 +113,35 @@ export const SwipeFeed: React.FC = () => {
                   onSwipe={handleSwipe}
                   onOpenDetails={(t) => setSelectedTrip(t)}
                   styleOffset={index}
+                  totalCards={activeDeck.length}
+                  currentIndex={index + 1}
                   dragBoundsWidth={dragBoundsWidth}
                 />
               );
             })
           ) : (
-            /* Empty State when deck is complete */
+            /* Empty State */
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 text-center shadow-card"
+              className="absolute inset-0 flex flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-cinema-900/90 p-6 text-center shadow-card-cinematic backdrop-blur-2xl"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-terracotta-50 text-terracotta-600 mb-4 ring-1 ring-terracotta-200">
-                <Compass className="h-8 w-8 text-terracotta-700" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-terracotta-500/15 text-terracotta-400 mb-4 ring-1 ring-terracotta-500/30">
+                <Compass className="h-8 w-8 animate-spin-slow" />
               </div>
 
-              <h3 className="text-xl font-bold text-gray-900 mb-1">
+              <h3 className="text-xl font-bold text-white mb-1">
                 You’re All Caught Up!
               </h3>
-              <p className="text-xs sm:text-sm text-gray-500 max-w-xs mb-6 leading-relaxed">
-                No more open trips matching your current filter. Check back soon or launch your own group itinerary!
+              <p className="text-xs sm:text-sm text-cinema-400 max-w-xs mb-6 leading-relaxed">
+                No more open expeditions matching this filter. Check back soon or launch your own group itinerary!
               </p>
 
               <div className="flex flex-col gap-2.5 w-full max-w-xs">
                 {selectedStyle !== 'All' && (
                   <button
                     onClick={() => setSelectedStyle('All')}
-                    className="flex items-center justify-center gap-2 rounded-2xl bg-stone-100 px-4 py-2.5 text-xs sm:text-sm font-bold text-gray-800 hover:bg-stone-200 transition-all border border-stone-200"
+                    className="flex items-center justify-center gap-2 rounded-2xl bg-cinema-800 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-cinema-700 transition-all border border-white/10"
                   >
                     <span>View All Travel Styles</span>
                   </button>
@@ -144,7 +157,7 @@ export const SwipeFeed: React.FC = () => {
 
                 <Link
                   href="/host"
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-white px-4 py-2.5 text-xs sm:text-sm font-semibold text-gray-600 hover:text-gray-900 border border-stone-200"
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-cinema-950 px-4 py-2.5 text-xs sm:text-sm font-semibold text-cinema-400 hover:text-white border border-white/10"
                 >
                   <span>Review Host Requests</span>
                 </Link>
@@ -154,19 +167,43 @@ export const SwipeFeed: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Swipe Action Trigger Buttons */}
+      {/* Bottom Floating Metric Pods Capsule Dock (exact match to the reference image) */}
       {currentTrip && (
-        <div className="mt-5 flex items-center justify-center gap-4 sm:gap-6">
-          {/* PASS BUTTON (Muted Coral) */}
+        <div className="mt-4 w-full flex items-center justify-center gap-2 px-2">
+          <div className="flex items-center gap-2 sm:gap-3 rounded-full bg-cinema-900/90 border border-white/15 px-4 py-2 shadow-capsule-glow backdrop-blur-2xl text-[11px] font-bold text-cinema-200">
+            <span className="flex items-center gap-1 text-emerald-400">
+              <DollarSign size={13} /> {formatINR(currentTrip.budget_per_person)}
+            </span>
+            <span className="text-white/20">•</span>
+            <span className="flex items-center gap-1 text-cinema-100">
+              <Users size={13} className="text-terracotta-400" />
+              {currentTrip.members?.length || 1}/{currentTrip.max_members} Spots
+            </span>
+            <span className="text-white/20">•</span>
+            <span className="flex items-center gap-1 text-amber-300">
+              <Sparkles size={13} /> Min {currentTrip.min_vibe_score}★
+            </span>
+            <span className="text-white/20">•</span>
+            <span className="flex items-center gap-1 text-cinema-300">
+              <Mountain size={13} /> {currentTrip.travel_style}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Action Triggers (Pass / Details / Join) */}
+      {currentTrip && (
+        <div className="mt-4 flex items-center justify-center gap-5">
+          {/* PASS BUTTON */}
           <motion.button
             whileTap={{ scale: 0.93 }}
             whileHover={{ scale: 1.05 }}
             onClick={() => handleSwipe('pass')}
-            className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-stone-200 bg-white text-rose-500 shadow-md transition-all hover:bg-rose-50 hover:border-rose-300 hover:shadow-subtle"
+            className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-cinema-900/90 text-rose-400 shadow-glass backdrop-blur-xl transition-all hover:bg-rose-950/40 hover:border-rose-500/50 hover:shadow-glow"
             title="Pass (Swipe Left)"
             aria-label="Pass trip"
           >
-            <X size={26} className="stroke-[2.5]" />
+            <X size={24} className="stroke-[2.5]" />
           </motion.button>
 
           {/* VIEW DETAILS MODAL BUTTON */}
@@ -174,23 +211,23 @@ export const SwipeFeed: React.FC = () => {
             whileTap={{ scale: 0.93 }}
             whileHover={{ scale: 1.05 }}
             onClick={() => setSelectedTrip(currentTrip)}
-            className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full border border-stone-200 bg-white text-gray-700 shadow-md transition-all hover:bg-stone-50 hover:text-terracotta-700"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/12 bg-cinema-900/90 text-cinema-200 shadow-glass backdrop-blur-xl transition-all hover:bg-cinema-800 hover:text-white"
             title="View Full Trip Details & Itinerary"
             aria-label="Trip Details"
           >
-            <Info size={20} />
+            <Info size={19} />
           </motion.button>
 
-          {/* JOIN REQUEST BUTTON (Soft Emerald / Terracotta Glow) */}
+          {/* JOIN REQUEST BUTTON */}
           <motion.button
             whileTap={{ scale: 0.93 }}
             whileHover={{ scale: 1.05 }}
             onClick={() => handleSwipe('like')}
-            className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-600 to-forest-600 text-white shadow-glow-emerald transition-all hover:scale-105 active:scale-95"
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-600 to-forest-600 text-white shadow-glow-emerald backdrop-blur-xl transition-all hover:scale-105 active:scale-95"
             title="Interested / Join Request (Swipe Right)"
             aria-label="Join trip"
           >
-            <Heart size={28} className="fill-white stroke-white" />
+            <Heart size={26} className="fill-white stroke-white" />
           </motion.button>
         </div>
       )}

@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-header transition-all">
+    <header className="sticky top-0 z-40 w-full glass-header-cinema transition-all">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
@@ -35,16 +35,16 @@ export const Navbar: React.FC = () => {
             <Flame className="h-5 w-5 text-white" />
           </div>
           <div>
-            <span className="text-xl font-black tracking-tight text-gray-900 font-display flex items-center">
-              Kar<span className="text-terracotta-600">vaan</span>
+            <span className="text-xl font-black tracking-tight text-white font-display flex items-center">
+              Kar<span className="text-terracotta-400">vaan</span>
             </span>
-            <span className="block text-[10px] uppercase font-extrabold tracking-wider text-gray-500 -mt-1">
-              Group Travel Budgeting
+            <span className="block text-[10px] uppercase font-bold tracking-widest text-cinema-400 -mt-1">
+              Group Travel Matchmaking
             </span>
           </div>
         </Link>
 
-        {/* Desktop Nav Items (visible on md screens when sidebars aren't present) */}
+        {/* Desktop Nav Items */}
         <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
           {navLinks.map((link) => {
             const Icon = link.icon;
@@ -67,10 +67,10 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs lg:text-sm font-semibold transition-all ${
+                className={`relative flex items-center gap-1.5 rounded-2xl px-3.5 py-2 text-xs lg:text-sm font-semibold transition-all ${
                   isActive
-                    ? 'bg-stone-100 text-terracotta-700 font-bold'
-                    : 'text-gray-600 hover:bg-stone-50 hover:text-gray-900'
+                    ? 'bg-cinema-850 text-white font-bold border border-white/10'
+                    : 'text-cinema-400 hover:bg-cinema-900/60 hover:text-white'
                 }`}
               >
                 <Icon size={16} />
@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 z-40 flex w-full md:hidden glass-nav-mobile py-2 px-2 justify-around items-center shadow-lg">
+      <div className="fixed bottom-0 left-0 z-40 flex w-full md:hidden glass-nav-mobile-cinema py-2 px-2 justify-around items-center shadow-2xl">
         {navLinks.map((link) => {
           const Icon = link.icon;
           const isActive = pathname === link.href;
@@ -102,7 +102,7 @@ export const Navbar: React.FC = () => {
               key={link.href}
               href={link.href}
               className={`relative flex flex-col items-center gap-0.5 rounded-xl p-2 text-[10px] font-semibold transition-all ${
-                isActive ? 'text-terracotta-600 font-bold' : 'text-gray-500 hover:text-gray-900'
+                isActive ? 'text-terracotta-400 font-bold' : 'text-cinema-400 hover:text-cinema-200'
               }`}
             >
               <div className="relative">

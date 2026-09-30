@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: #F9FAFB;
-    --foreground: #111827;
+    --background: #11100F;
+    --foreground: #F5F5F4;
   }
 }
 
@@ -19,23 +19,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Soft Scrollbars */
+/* Custom Cinematic Dark Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F3F4F6;
+  background: #11100F;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
+  background: #2C2925;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: #524D46;
 }
 
 .scrollbar-none::-webkit-scrollbar {
@@ -46,36 +46,43 @@ body {
   scrollbar-width: none;
 }
 
-/* Premium Canvas & Card Utilities */
-.canvas-bg {
-  background-color: #F9FAFB;
+/* Warm Twilight Cinematic Ambient Background */
+.cinematic-bg {
+  background-color: #11100F;
   background-image: 
-    radial-gradient(at 100% 0%, rgba(194, 65, 12, 0.02) 0px, transparent 40%),
-    radial-gradient(at 0% 100%, rgba(4, 120, 87, 0.02) 0px, transparent 40%);
+    radial-gradient(circle at 82% 38%, rgba(245, 215, 175, 0.14) 0%, rgba(245, 215, 175, 0.04) 25%, transparent 50%),
+    radial-gradient(circle at 18% 70%, rgba(217, 119, 6, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 15%, rgba(140, 160, 190, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(30, 27, 24, 0.8) 0%, transparent 60%);
 }
 
-.glass-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+/* Glassmorphism Panels */
+.glass-panel-cinema {
+  background: rgba(26, 24, 22, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
 }
 
-.glass-nav-mobile {
-  background: rgba(255, 255, 255, 0.92);
+.glass-capsule {
+  background: rgba(34, 32, 29, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(229, 231, 235, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
 }
 
-.card-white {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 1px 1px rgba(0, 0, 0, 0.03);
+.glass-header-cinema {
+  background: rgba(17, 16, 15, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.card-subtle {
-  background: #FFFFFF;
-  border: 1px solid #F3F4F6;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+.glass-nav-mobile-cinema {
+  background: rgba(17, 16, 15, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }

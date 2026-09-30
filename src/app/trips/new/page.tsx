@@ -108,7 +108,7 @@ export default function NewTripPage() {
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#c2410c', '#10b981', '#047857', '#d97706'],
+          colors: ['#ea580c', '#10b981', '#f59e0b', '#d97706'],
         });
       } catch {
         // ignore
@@ -126,22 +126,22 @@ export default function NewTripPage() {
     <div className="max-w-4xl mx-auto px-4 py-6 sm:py-10">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-terracotta-50 px-3.5 py-1 text-xs font-bold text-terracotta-700 border border-terracotta-200 mb-2 shadow-subtle">
-          <Compass size={14} />
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-cinema-850/80 px-3.5 py-1 text-xs font-bold text-cinema-300 border border-white/10 mb-2 shadow-glass backdrop-blur-xl">
+          <Compass size={14} className="text-terracotta-400" />
           <span>Host a Group Itinerary</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-black text-gray-900 font-display">
+        <h1 className="text-2xl sm:text-4xl font-black text-white font-display">
           Post Your Next Group Travel Plan
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-gray-500">
+        <p className="mt-1 text-xs sm:text-sm text-cinema-400">
           Set your budget limits, minimum required vibe score, and let fellow travelers swipe to join your squad.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Step 1: Destination & Concept */}
-        <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-5">
-          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-5">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-black">
               1
             </span>
@@ -150,7 +150,7 @@ export default function NewTripPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
                 Trip Title *
               </label>
               <input
@@ -159,30 +159,30 @@ export default function NewTripPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="E.g., Kasol & Kheerganga Stargazing Backpacking"
-                className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-cinema-950 px-4 py-3 text-sm text-white placeholder-cinema-500 focus:border-terracotta-500 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
                 Destination / Location *
               </label>
               <div className="relative">
-                <MapPin className="absolute left-3.5 top-3.5 text-gray-400" size={16} />
+                <MapPin className="absolute left-3.5 top-3.5 text-cinema-400" size={16} />
                 <input
                   type="text"
                   required
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="E.g., Parvati Valley, Himachal Pradesh"
-                  className="w-full rounded-2xl border border-stone-200 bg-stone-50 pl-10 pr-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+                  className="w-full rounded-2xl border border-white/10 bg-cinema-950 pl-10 pr-4 py-3 text-sm text-white placeholder-cinema-500 focus:border-terracotta-500 focus:outline-none"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
               Trip Description & Squad Vibe *
             </label>
             <textarea
@@ -191,13 +191,13 @@ export default function NewTripPage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe the plan, stays, daily activities, transportation split, and the kind of co-travelers you're seeking..."
-              className="w-full rounded-2xl border border-stone-200 bg-stone-50 p-4 text-sm text-gray-900 placeholder-gray-400 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+              className="w-full rounded-2xl border border-white/10 bg-cinema-950 p-4 text-sm text-white placeholder-cinema-500 focus:border-terracotta-500 focus:outline-none"
             />
           </div>
 
           {/* Travel Style Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-2">
               Preferred Travel Style
             </label>
             <div className="flex flex-wrap gap-2">
@@ -217,8 +217,8 @@ export default function NewTripPage() {
                   onClick={() => setTravelStyle(style)}
                   className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
                     travelStyle === style
-                      ? 'bg-terracotta-700 text-white shadow-glow scale-105'
-                      : 'bg-stone-100 text-gray-700 hover:bg-stone-200'
+                      ? 'bg-terracotta-600 text-white shadow-glow scale-105'
+                      : 'bg-cinema-850 text-cinema-300 hover:bg-cinema-800 border border-white/5'
                   }`}
                 >
                   {style}
@@ -229,15 +229,15 @@ export default function NewTripPage() {
         </div>
 
         {/* Step 2: Cover Photo */}
-        <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-4">
-          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-4">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-black">
               2
             </span>
             Destination Visuals
           </h2>
 
-          <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">
+          <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1">
             Select a Destination Cover
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -248,8 +248,8 @@ export default function NewTripPage() {
                 onClick={() => setCoverImage(preset.url)}
                 className={`group relative h-24 overflow-hidden rounded-2xl border-2 transition-all ${
                   coverImage === preset.url
-                    ? 'border-terracotta-600 ring-2 ring-terracotta-300 scale-[1.02]'
-                    : 'border-stone-200 opacity-70 hover:opacity-100'
+                    ? 'border-terracotta-500 ring-2 ring-terracotta-500/40 scale-[1.02]'
+                    : 'border-white/10 opacity-70 hover:opacity-100'
                 }`}
               >
                 <Image
@@ -258,7 +258,7 @@ export default function NewTripPage() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
                   <span className="text-[11px] font-bold text-white truncate">
                     {preset.label}
                   </span>
@@ -273,14 +273,14 @@ export default function NewTripPage() {
               value={coverImage}
               onChange={(e) => setCoverImage(e.target.value)}
               placeholder="Or paste custom image URL: https://..."
-              className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-xs text-gray-900 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+              className="w-full rounded-2xl border border-white/10 bg-cinema-950 px-4 py-2.5 text-xs text-white focus:border-terracotta-500 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Step 3: Budget, Dates & Group Constraints */}
-        <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-5">
-          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-5">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-black">
               3
             </span>
@@ -290,7 +290,7 @@ export default function NewTripPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {/* Budget Per Person */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
                 Estimated Budget / Head (₹) *
               </label>
               <input
@@ -300,13 +300,13 @@ export default function NewTripPage() {
                 required
                 value={budgetPerPerson}
                 onChange={(e) => setBudgetPerPerson(Number(e.target.value))}
-                className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-forest-700 font-extrabold focus:border-terracotta-500 focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-cinema-950 px-4 py-2.5 text-sm text-emerald-400 font-extrabold focus:border-terracotta-500 focus:outline-none"
               />
             </div>
 
             {/* Start Date */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
                 Start Date *
               </label>
               <input
@@ -314,13 +314,13 @@ export default function NewTripPage() {
                 required
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-gray-900 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-cinema-950 px-4 py-2.5 text-sm text-white focus:border-terracotta-500 focus:outline-none"
               />
             </div>
 
             {/* End Date */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5">
                 End Date *
               </label>
               <input
@@ -328,7 +328,7 @@ export default function NewTripPage() {
                 required
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-gray-900 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-cinema-950 px-4 py-2.5 text-sm text-white focus:border-terracotta-500 focus:outline-none"
               />
             </div>
           </div>
@@ -337,8 +337,8 @@ export default function NewTripPage() {
             {/* Max Group Size */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-600">
-                  Max Squad Size: <span className="text-terracotta-700 font-extrabold">{maxMembers} People</span>
+                <label className="text-xs font-bold uppercase tracking-wider text-cinema-400">
+                  Max Squad Size: <span className="text-terracotta-400 font-extrabold">{maxMembers} People</span>
                 </label>
               </div>
               <input
@@ -347,9 +347,9 @@ export default function NewTripPage() {
                 max={12}
                 value={maxMembers}
                 onChange={(e) => setMaxMembers(Number(e.target.value))}
-                className="w-full accent-terracotta-600"
+                className="w-full accent-terracotta-500"
               />
-              <div className="flex justify-between text-[10px] text-gray-400 mt-1 font-medium">
+              <div className="flex justify-between text-[10px] text-cinema-500 mt-1 font-medium">
                 <span>2 (Tandem)</span>
                 <span>4 (Optimal)</span>
                 <span>8 (Mid squad)</span>
@@ -360,9 +360,9 @@ export default function NewTripPage() {
             {/* Minimum Vibe Score Slider */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-600 flex items-center gap-1">
-                  <ShieldCheck size={14} className="text-amber-600" />
-                  Min Required Vibe Score: <span className="text-amber-600 font-extrabold">{minVibeScore.toFixed(1)} / 5.0</span>
+                <label className="text-xs font-bold uppercase tracking-wider text-cinema-400 flex items-center gap-1">
+                  <ShieldCheck size={14} className="text-amber-400" />
+                  Min Required Vibe Score: <span className="text-amber-300 font-extrabold">{minVibeScore.toFixed(1)} / 5.0</span>
                 </label>
               </div>
               <input
@@ -372,9 +372,9 @@ export default function NewTripPage() {
                 step={0.1}
                 value={minVibeScore}
                 onChange={(e) => setMinVibeScore(Number(e.target.value))}
-                className="w-full accent-amber-600"
+                className="w-full accent-amber-500"
               />
-              <div className="flex justify-between text-[10px] text-gray-400 mt-1 font-medium">
+              <div className="flex justify-between text-[10px] text-cinema-500 mt-1 font-medium">
                 <span>3.0 (Open)</span>
                 <span>4.0 (Recommended)</span>
                 <span>4.5 (High Vibe Only)</span>
@@ -383,19 +383,19 @@ export default function NewTripPage() {
           </div>
 
           {/* Computed Summary Box */}
-          <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200 flex items-center justify-between">
-            <div className="text-xs text-gray-500 font-medium">
+          <div className="rounded-2xl bg-cinema-950 p-4 border border-white/10 flex items-center justify-between">
+            <div className="text-xs text-cinema-400 font-medium">
               Total Estimated Group Kitty Pool:
             </div>
-            <div className="text-lg font-black text-forest-700 font-display">
+            <div className="text-lg font-black text-emerald-400 font-display">
               ₹{(budgetPerPerson * maxMembers).toLocaleString('en-IN')}
             </div>
           </div>
         </div>
 
         {/* Step 4: Itinerary Highlights */}
-        <div className="rounded-3xl sm:rounded-4xl border border-stone-200 bg-white p-6 sm:p-8 shadow-card space-y-4">
-          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+        <div className="rounded-[2.5rem] border border-white/10 bg-cinema-900/80 p-6 sm:p-8 shadow-glass backdrop-blur-2xl space-y-4">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-terracotta-600 text-white text-xs font-black">
               4
             </span>
@@ -414,12 +414,12 @@ export default function NewTripPage() {
                 }
               }}
               placeholder="E.g., Midnight cliff camping under the Perseid meteor shower"
-              className="flex-1 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+              className="flex-1 rounded-2xl border border-white/10 bg-cinema-950 px-4 py-3 text-xs sm:text-sm text-white placeholder-cinema-500 focus:border-terracotta-500 focus:outline-none"
             />
             <button
               type="button"
               onClick={addHighlight}
-              className="flex items-center gap-1.5 rounded-2xl bg-stone-800 px-5 py-3 text-xs sm:text-sm font-bold text-white hover:bg-stone-900"
+              className="flex items-center gap-1.5 rounded-2xl bg-cinema-800 px-5 py-3 text-xs sm:text-sm font-bold text-white hover:bg-cinema-700 border border-white/10"
             >
               <Plus size={16} />
               <span>Add</span>
@@ -430,10 +430,10 @@ export default function NewTripPage() {
             {highlights.map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between gap-2 rounded-2xl border border-stone-200 bg-stone-50 p-3.5"
+                className="flex items-center justify-between gap-2 rounded-2xl border border-white/5 bg-cinema-950/60 p-3.5"
               >
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-800">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-terracotta-100 text-terracotta-700 text-xs font-bold">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm text-cinema-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-terracotta-500/20 text-terracotta-400 text-xs font-bold">
                     {idx + 1}
                   </span>
                   <span>{item}</span>
@@ -441,7 +441,7 @@ export default function NewTripPage() {
                 <button
                   type="button"
                   onClick={() => removeHighlight(idx)}
-                  className="text-stone-400 hover:text-rose-600 transition-colors p-1"
+                  className="text-cinema-400 hover:text-rose-400 transition-colors p-1"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -455,7 +455,7 @@ export default function NewTripPage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="rounded-2xl border border-stone-200 bg-stone-100 px-6 py-3 text-sm font-bold text-gray-700 hover:bg-stone-200 transition-all"
+            className="rounded-2xl border border-white/10 bg-cinema-850 px-6 py-3 text-sm font-bold text-cinema-300 hover:bg-cinema-800 transition-all"
           >
             Cancel
           </button>

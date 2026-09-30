@@ -28,10 +28,10 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
   const isPending = swipe.status === 'pending';
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 rounded-3xl border border-stone-200 bg-white p-5 sm:p-6 shadow-card transition-all hover:border-stone-300">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 rounded-[2rem] border border-white/10 bg-cinema-900/80 p-5 sm:p-6 shadow-glass backdrop-blur-2xl transition-all hover:border-white/20">
       {/* Left: Applicant info */}
       <div className="flex items-start gap-4 flex-1 min-w-0">
-        <div className="relative h-14 w-14 sm:h-16 sm:w-16 flex-shrink-0 overflow-hidden rounded-2xl ring-2 ring-terracotta-400/40 shadow-subtle">
+        <div className="relative h-14 w-14 sm:h-16 sm:w-16 flex-shrink-0 overflow-hidden rounded-2xl ring-2 ring-terracotta-500/40 shadow-md">
           <Image
             src={applicant.avatar_url}
             alt={applicant.full_name}
@@ -43,7 +43,7 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
 
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 truncate">
+            <h3 className="text-base sm:text-lg font-bold text-white truncate">
               {applicant.full_name}
             </h3>
             <VibeScorePill
@@ -51,12 +51,12 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
               reviewsCount={applicant.reviews_count}
               size="sm"
             />
-            <span className="rounded-full bg-stone-100 px-2.5 py-0.5 text-[11px] font-semibold text-gray-600 border border-stone-200">
+            <span className="rounded-full bg-cinema-800 px-2.5 py-0.5 text-[11px] font-semibold text-cinema-300 border border-white/10">
               {applicant.travel_style}
             </span>
           </div>
 
-          <p className="mt-1 text-xs text-gray-600 line-clamp-2 leading-relaxed">
+          <p className="mt-1 text-xs text-cinema-300 line-clamp-2 leading-relaxed">
             {applicant.bio}
           </p>
 
@@ -77,8 +77,8 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
           )}
 
           {/* Requested Trip info */}
-          <div className="mt-3 flex items-center gap-3 text-xs text-gray-500 pt-2 border-t border-stone-100 font-medium">
-            <div className="flex items-center gap-1 text-terracotta-700 font-bold truncate">
+          <div className="mt-3 flex items-center gap-3 text-xs text-cinema-400 pt-2 border-t border-white/10 font-medium">
+            <div className="flex items-center gap-1 text-terracotta-400 font-bold truncate">
               <MapPin size={13} />
               <span>{trip.title}</span>
             </div>
@@ -89,12 +89,12 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
       </div>
 
       {/* Right: Actions / Status */}
-      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-stone-100 flex-shrink-0">
+      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/10 flex-shrink-0">
         {isPending ? (
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => onReject(swipe.id)}
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 rounded-2xl border border-stone-200 bg-white px-4 py-2.5 text-xs font-bold text-rose-600 hover:bg-rose-50 transition-all active:scale-95"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-cinema-850 px-4 py-2.5 text-xs font-bold text-rose-400 hover:bg-rose-950/40 transition-all active:scale-95"
             >
               <X size={15} />
               <span>Reject</span>
@@ -111,11 +111,11 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
         ) : (
           <div className="flex items-center gap-1.5">
             {swipe.status === 'accepted' ? (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3.5 py-1 text-xs font-bold text-forest-700 border border-forest-200">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/70 px-3.5 py-1 text-xs font-bold text-emerald-400 border border-emerald-500/30">
                 <Check size={14} /> Confirmed Squad Member
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3.5 py-1 text-xs font-semibold text-gray-500 border border-stone-200">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cinema-850 px-3.5 py-1 text-xs font-semibold text-cinema-400 border border-white/10">
                 <X size={14} /> Request Declined
               </span>
             )}
@@ -124,7 +124,7 @@ export const HostRequestCard: React.FC<HostRequestCardProps> = ({
 
         {/* Vibe requirement note */}
         {!meetsVibe && isPending && (
-          <div className="flex items-center gap-1 text-[10px] text-amber-600 font-medium">
+          <div className="flex items-center gap-1 text-[10px] text-amber-400 font-medium">
             <ShieldAlert size={12} />
             <span>Below trip minimum ({trip.min_vibe_score.toFixed(1)})</span>
           </div>

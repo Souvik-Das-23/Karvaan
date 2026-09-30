@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
-import { MapPin, Calendar, Users, Sparkles, Heart, Ban, Info, ShieldCheck } from 'lucide-react';
+import { MapPin, Calendar, Users, Sparkles, Heart, Ban, Info, ShieldCheck, Compass } from 'lucide-react';
 import { Trip } from '@/lib/types';
 import { formatINR, formatDateRange } from '@/lib/utils';
 import { VibeScorePill } from './VibeScorePill';
@@ -14,6 +14,8 @@ interface SwipeCardProps {
   onSwipe: (direction: 'like' | 'pass') => void;
   onOpenDetails: (trip: Trip) => void;
   styleOffset?: number;
+  totalCards?: number;
+  currentIndex?: number;
   dragBoundsWidth?: number;
 }
 
@@ -23,6 +25,8 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
   onSwipe,
   onOpenDetails,
   styleOffset = 0,
+  totalCards = 5,
+  currentIndex = 1,
   dragBoundsWidth = 360,
 }) => {
   const x = useMotionValue(0);
@@ -46,9 +50,14 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
     }
   };
 
-  // Stack depth visual offsets
-  const scale = 1 - styleOffset * 0.035;
-  const translateY = styleOffset * 12;
+  // 3D Horizon Fan Carousel perspective based on stack offset
+  // Offset 0 = Active center card
+  // Offset 1 = Left or Right flanking preview
+  // Offset 2 = Outer receding card
+  const scale = 1 - styleOffset * 0.05;
+  const translateY = styleOffset * 8;
+  const rotateY = styleOffset === 1 ? -6 : styleOffset === 2 ? 6 : 0;
+  const brightness = 1 - styleOffset * 0.25;
 
   return (
     <motion.div
@@ -63,9 +72,11 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
           : {
               scale,
               y: translateY,
+              rotate: rotateY,
               zIndex: 30 - styleOffset,
               pointerEvents: 'none',
               transformOrigin: 'bottom center',
+              filter: `brightness(${brightness})`,
             }
       }
       drag={isFront ? 'x' : false}
@@ -78,172 +89,141 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
           ? {
               scale,
               y: translateY,
+              rotate: rotateY,
               transition: { type: 'spring', stiffness: 350, damping: 28 },
             }
           : undefined
       }
-      className="absolute inset-0 select-none rounded-3xl sm:rounded-4xl bg-white border border-stone-200/90 shadow-card overflow-hidden flex flex-col cursor-grab will-change-transform"
+      className="absolute inset-0 select-none rounded-[2.25rem] sm:rounded-[2.75rem] bg-cinema-900 border border-white/15 shadow-card-cinematic overflow-hidden flex flex-col cursor-grab will-change-transform"
     >
-      {/* Top Image Section */}
-      <div className="relative h-[54%] sm:h-[56%] w-full overflow-hidden bg-stone-100">
+      {/* Full-Bleed Atmospheric Destination Image */}
+      <div className="relative h-full w-full overflow-hidden bg-cinema-950">
         <Image
           src={trip.cover_image}
           alt={trip.title}
           fill
           sizes="(max-width: 640px) 100vw, 440px"
-          className="object-cover pointer-events-none brightness-[0.92]"
+          className="object-cover pointer-events-none brightness-[0.88] contrast-[1.05]"
           priority={isFront}
         />
 
-        {/* Ambient Top & Bottom Image Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+        {/* Cinematic Vignette Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-t from-cinema-950 via-cinema-950/25 to-black/50 pointer-events-none" />
 
-        {/* Top Badges */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
-          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-gray-900 backdrop-blur-md border border-white/40 shadow-subtle">
+        {/* Top Header: Style Badge & Index Counter (e.g., 1 / 20) */}
+        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+          <span className="rounded-full bg-black/50 backdrop-blur-xl px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-cinema-100 border border-white/10 shadow-lg">
             {trip.travel_style}
           </span>
 
-          <div className="flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-terracotta-700 backdrop-blur-md border border-stone-200 shadow-subtle">
-            <ShieldCheck size={14} className="text-terracotta-600" />
-            <span>Min {trip.min_vibe_score.toFixed(1)}+ Vibe</span>
+          {/* Index Counter Pill (like "1 / 20" in the reference image) */}
+          <div className="flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-xl px-3 py-1 text-xs font-black text-cinema-200 border border-white/12 shadow-lg">
+            <span className="text-white font-extrabold">{currentIndex}</span>
+            <span className="text-cinema-400 font-medium">/</span>
+            <span className="text-cinema-400 font-medium">{totalCards}</span>
           </div>
         </div>
 
         {/* SWIPE OVERLAY STAMPS */}
         {isFront && (
           <>
-            {/* RIGHT SWIPE = JOIN / LIKE STAMP (Soft Emerald) */}
+            {/* JOIN STAMP */}
             <motion.div
               style={{ opacity: likeOpacity }}
-              className="absolute top-8 left-6 rotate-[-16deg] rounded-2xl border-[3px] border-emerald-500 bg-white/95 px-4 py-2 backdrop-blur-md pointer-events-none shadow-glow-emerald z-20"
+              className="absolute top-12 left-6 rotate-[-16deg] rounded-3xl border-[3px] border-emerald-400 bg-emerald-950/80 px-5 py-2.5 backdrop-blur-2xl pointer-events-none shadow-glow-emerald z-30"
             >
-              <div className="flex items-center gap-2 text-xl font-black uppercase tracking-wider text-emerald-600">
-                <Heart size={24} className="fill-emerald-500 stroke-emerald-600" />
+              <div className="flex items-center gap-2 text-xl font-black uppercase tracking-widest text-emerald-300">
+                <Heart size={24} className="fill-emerald-400 stroke-emerald-400" />
                 <span>JOIN</span>
               </div>
             </motion.div>
 
-            {/* LEFT SWIPE = PASS / NOPE STAMP (Muted Coral) */}
+            {/* PASS STAMP */}
             <motion.div
               style={{ opacity: passOpacity }}
-              className="absolute top-8 right-6 rotate-[16deg] rounded-2xl border-[3px] border-rose-500 bg-white/95 px-4 py-2 backdrop-blur-md pointer-events-none shadow-glow z-20"
+              className="absolute top-12 right-6 rotate-[16deg] rounded-3xl border-[3px] border-rose-500 bg-rose-950/80 px-5 py-2.5 backdrop-blur-2xl pointer-events-none shadow-glow z-30"
             >
-              <div className="flex items-center gap-2 text-xl font-black uppercase tracking-wider text-rose-600">
-                <Ban size={24} className="stroke-rose-600 stroke-[2.5]" />
+              <div className="flex items-center gap-2 text-xl font-black uppercase tracking-widest text-rose-300">
+                <Ban size={24} className="stroke-rose-400 stroke-[2.5]" />
                 <span>PASS</span>
               </div>
             </motion.div>
           </>
         )}
 
-        {/* Price Tag Pill Floating on Image */}
-        <div className="absolute bottom-3.5 left-4 pointer-events-none z-10">
-          <div className="flex items-baseline gap-1.5 rounded-2xl bg-white/95 px-3.5 py-1.5 backdrop-blur-md border border-stone-200 shadow-subtle">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
-              Per Head:
-            </span>
-            <span className="text-xl font-black text-gray-900 font-display">
-              {formatINR(trip.budget_per_person)}
-            </span>
-          </div>
-        </div>
-
-        {/* Info button to open full details */}
+        {/* Floating Info Button on Image */}
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             onOpenDetails(trip);
           }}
-          className="absolute bottom-3.5 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-gray-700 backdrop-blur-md border border-stone-200 shadow-md transition-all hover:bg-white hover:text-terracotta-600 hover:scale-105 active:scale-95"
-          title="View full trip details"
+          className="absolute top-4 right-20 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-cinema-300 backdrop-blur-xl border border-white/10 shadow-lg transition-all hover:bg-white/20 hover:text-white active:scale-95"
+          title="Trip Details & Itinerary"
         >
-          <Info size={18} />
+          <Info size={14} />
         </button>
-      </div>
 
-      {/* Bottom Content Area */}
-      <div className="flex flex-1 flex-col justify-between p-5 sm:p-6 bg-white text-gray-900">
-        {/* Title & Location */}
-        <div>
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-terracotta-700 mb-1">
-            <MapPin size={14} className="flex-shrink-0" />
-            <span className="truncate">{trip.destination}</span>
+        {/* Center / Bottom Card Typography (Clean White & Warm Champagne) */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end text-left z-20 bg-gradient-to-t from-cinema-950 via-cinema-950/80 to-transparent pt-16">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-terracotta-400 mb-1">
+            <MapPin size={13} className="flex-shrink-0" />
+            <span className="truncate tracking-wide">{trip.destination}</span>
           </div>
 
-          <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 tracking-tight line-clamp-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md">
             {trip.title}
           </h3>
 
-          <div className="mt-1 flex items-center gap-1.5 text-xs text-gray-500 font-medium">
-            <Calendar size={13} />
-            <span>{formatDateRange(trip.start_date, trip.end_date)}</span>
-          </div>
-        </div>
-
-        {/* Confirmed Squad Avatars & Vibe Scores */}
-        <div className="mt-2.5 rounded-2xl border border-stone-100 bg-stone-50/80 p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-gray-700">
-              <Users size={14} className="text-terracotta-600" />
-              <span>
-                Confirmed Squad ({spotsFilled}/{trip.max_members})
-              </span>
-            </div>
-            <span className="text-[11px] font-bold text-forest-700 bg-forest-50 px-2 py-0.5 rounded-full border border-forest-200">
-              {spotsLeft > 0 ? `${spotsLeft} spots left` : 'Squad Full'}
+          <div className="mt-1.5 flex items-center justify-between text-xs text-cinema-300">
+            <span className="flex items-center gap-1">
+              <Calendar size={12} className="text-cinema-400" />
+              {formatDateRange(trip.start_date, trip.end_date)}
+            </span>
+            <span className="font-extrabold text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
+              Min {trip.min_vibe_score.toFixed(1)}+ Vibe
             </span>
           </div>
 
-          {/* Avatars with mini Vibe Score chips */}
-          <div className="flex items-center gap-2 overflow-x-auto py-0.5 scrollbar-none">
-            {confirmedMembers.map((member) => {
-              const profile = member.profile || (member.user_id === trip.host_id ? hostProfile : undefined);
-              if (!profile) return null;
+          {/* Confirmed Squad Members Avatars Row */}
+          <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-bold text-cinema-300 uppercase tracking-wider">
+                Squad ({spotsFilled}/{trip.max_members}):
+              </span>
+              <div className="flex items-center -space-x-2">
+                {confirmedMembers.map((member) => {
+                  const profile = member.profile || (member.user_id === trip.host_id ? hostProfile : undefined);
+                  if (!profile) return null;
 
-              return (
-                <div
-                  key={member.id}
-                  className="group relative flex flex-col items-center flex-shrink-0"
-                  title={`${profile.full_name} (${member.role === 'host' ? 'Host' : 'Member'}) • Vibe: ${profile.vibe_score}`}
-                >
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white shadow-subtle transition-transform group-hover:scale-105">
-                    <Image
-                      src={profile.avatar_url}
-                      alt={profile.full_name}
-                      fill
-                      className="object-cover"
-                      sizes="40px"
-                    />
-                  </div>
-                  <div className="-mt-2 z-10">
-                    <VibeScorePill score={profile.vibe_score} size="sm" showIcon={false} />
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Empty Spot Placeholders */}
-            {Array.from({ length: spotsLeft }).map((_, idx) => (
-              <div
-                key={`empty-${idx}`}
-                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-stone-300 bg-white text-stone-400"
-                title="Open squad slot"
-              >
-                <Users size={13} />
+                  return (
+                    <div
+                      key={member.id}
+                      className="relative h-7 w-7 overflow-hidden rounded-full ring-2 ring-cinema-950 shadow-md"
+                      title={`${profile.full_name} (${member.role === 'host' ? 'Host' : 'Member'}) • Vibe: ${profile.vibe_score}`}
+                    >
+                      <Image
+                        src={profile.avatar_url}
+                        alt={profile.full_name}
+                        fill
+                        className="object-cover"
+                        sizes="28px"
+                      />
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            </div>
+
+            {/* Price Pill */}
+            <div className="text-right">
+              <span className="text-lg sm:text-xl font-black text-emerald-400 font-display">
+                {formatINR(trip.budget_per_person)}
+              </span>
+              <span className="text-[10px] text-cinema-400 block -mt-1 font-medium">per head</span>
+            </div>
           </div>
         </div>
-
-        {/* Itinerary Snippet */}
-        {trip.itinerary_highlights && trip.itinerary_highlights.length > 0 && (
-          <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-600 truncate font-medium">
-            <Sparkles size={13} className="text-amber-500 flex-shrink-0" />
-            <span className="truncate">{trip.itinerary_highlights[0]}</span>
-          </div>
-        )}
       </div>
     </motion.div>
   );

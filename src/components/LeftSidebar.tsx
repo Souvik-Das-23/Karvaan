@@ -11,9 +11,9 @@ import {
   User,
   Bell,
   ShieldCheck,
-  CheckCircle,
+  Mountain,
   MapPin,
-  HeartHandshake,
+  Layers,
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ import { VibeBadge } from './VibeBadge';
 
 export const LeftSidebar: React.FC = () => {
   const pathname = usePathname();
-  const { currentUser, getIncomingRequestsForHost, trips } = useApp();
+  const { currentUser, getIncomingRequestsForHost } = useApp();
 
   const incomingRequests = getIncomingRequestsForHost();
   const pendingCount = incomingRequests.filter((r) => r.status === 'pending').length;
@@ -74,14 +74,14 @@ export const LeftSidebar: React.FC = () => {
                 href={link.href}
                 className={`flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all ${
                   isActive
-                    ? 'bg-white text-terracotta-700 font-bold shadow-subtle border border-stone-200'
-                    : 'text-gray-600 hover:bg-white/80 hover:text-gray-900'
+                    ? 'bg-cinema-850 text-white font-bold border border-white/12 shadow-glass'
+                    : 'text-cinema-400 hover:bg-cinema-900/60 hover:text-white'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <Icon
                     size={18}
-                    className={isActive ? 'text-terracotta-600' : 'text-gray-400'}
+                    className={isActive ? 'text-terracotta-400' : 'text-cinema-400'}
                   />
                   <span>{link.label}</span>
                 </div>
@@ -97,10 +97,10 @@ export const LeftSidebar: React.FC = () => {
       </div>
 
       {/* Bottom Section: Active Persona Profile Summary Card */}
-      <div className="rounded-3xl border border-stone-200 bg-white p-5 shadow-card space-y-3.5">
+      <div className="rounded-[2rem] border border-white/10 bg-cinema-900/80 p-5 shadow-glass backdrop-blur-2xl space-y-3.5">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative h-12 w-12 overflow-hidden rounded-2xl ring-2 ring-terracotta-500/30">
+            <div className="relative h-12 w-12 overflow-hidden rounded-2xl ring-2 ring-terracotta-500/40">
               <Image
                 src={currentUser.avatar_url}
                 alt={currentUser.full_name}
@@ -109,10 +109,10 @@ export const LeftSidebar: React.FC = () => {
               />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-gray-900 leading-tight">
+              <h3 className="text-sm font-bold text-white leading-tight">
                 {currentUser.full_name}
               </h3>
-              <p className="text-[11px] text-gray-500">
+              <p className="text-[11px] text-cinema-400">
                 {currentUser.travel_style} • {currentUser.age} yrs
               </p>
             </div>
@@ -121,7 +121,7 @@ export const LeftSidebar: React.FC = () => {
           <VibeScorePill score={currentUser.vibe_score} size="sm" />
         </div>
 
-        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+        <p className="text-xs text-cinema-300 line-clamp-2 leading-relaxed">
           {currentUser.bio}
         </p>
 
@@ -136,13 +136,13 @@ export const LeftSidebar: React.FC = () => {
           </div>
         )}
 
-        <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-[11px] text-gray-500">
-          <span className="flex items-center gap-1 text-forest-700 font-bold">
+        <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-cinema-400">
+          <span className="flex items-center gap-1 text-emerald-400 font-bold">
             <ShieldCheck size={13} /> Verified Traveler
           </span>
           <Link
             href="/profile"
-            className="text-terracotta-600 font-bold hover:underline"
+            className="text-terracotta-400 font-bold hover:underline"
           >
             View Profile →
           </Link>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Star } from 'lucide-react';
-import { getVibeScoreColor, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface VibeScorePillProps {
   score: number;
@@ -19,27 +19,22 @@ export const VibeScorePill: React.FC<VibeScorePillProps> = ({
   showIcon = true,
   className,
 }) => {
-  const colors = getVibeScoreColor(score);
-
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs font-bold gap-1',
-    md: 'px-2.5 py-1 text-xs font-extrabold gap-1.5',
-    lg: 'px-3.5 py-1.5 text-sm font-black gap-2',
+    sm: 'px-2 py-0.5 text-[11px] font-bold gap-1',
+    md: 'px-2.5 py-1 text-xs font-bold gap-1.5',
+    lg: 'px-3.5 py-1.5 text-sm font-extrabold gap-2',
   };
 
   const iconSizes = {
     sm: 11,
     md: 13,
-    lg: 16,
+    lg: 15,
   };
 
   return (
     <div
       className={cn(
-        'inline-flex items-center rounded-full border transition-all duration-200 shadow-subtle',
-        colors.bg,
-        colors.text,
-        colors.border,
+        'inline-flex items-center rounded-full bg-cinema-850/90 text-amber-300 border border-white/12 shadow-capsule-glow backdrop-blur-xl transition-all duration-200',
         sizeClasses[size],
         className
       )}
@@ -50,13 +45,13 @@ export const VibeScorePill: React.FC<VibeScorePillProps> = ({
       {showIcon && (
         <Star
           size={iconSizes[size]}
-          className="fill-current text-current filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]"
+          className="fill-amber-400 text-amber-400 filter drop-shadow-[0_0_6px_rgba(245,158,11,0.5)]"
         />
       )}
-      <span>{score.toFixed(1)}</span>
-      <span className="text-[0.7em] opacity-70 font-semibold">/ 5.0</span>
+      <span className="text-white font-extrabold">{score.toFixed(1)}</span>
+      <span className="text-[0.7em] text-cinema-400 font-medium">/ 5.0</span>
       {reviewsCount !== undefined && (
-        <span className="text-[0.75em] opacity-60 font-semibold ml-0.5">
+        <span className="text-[0.75em] text-cinema-400 font-normal ml-0.5">
           ({reviewsCount})
         </span>
       )}

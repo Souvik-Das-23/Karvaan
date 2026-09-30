@@ -53,7 +53,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#c2410c', '#10b981', '#047857', '#d97706'],
+          colors: ['#ea580c', '#10b981', '#f59e0b', '#d97706'],
         });
       } catch {
         // ignore
@@ -69,22 +69,22 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
   const availableBadges = Object.keys(BADGE_CONFIG);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-lg overflow-hidden rounded-3xl sm:rounded-4xl border border-stone-200 bg-white shadow-2xl p-6 sm:p-8 text-gray-900 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-lg overflow-hidden rounded-[2.5rem] border border-white/12 bg-cinema-900 shadow-2xl p-6 sm:p-8 text-white max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-stone-100 text-gray-500 hover:text-gray-900 hover:bg-stone-200 transition-all"
+          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-cinema-850 text-cinema-300 hover:text-white hover:bg-cinema-800 transition-all border border-white/10"
         >
           <X size={18} />
         </button>
 
         {/* Header */}
-        <div className="flex items-center gap-3.5 pb-4 border-b border-stone-100">
-          <div className="relative h-14 w-14 overflow-hidden rounded-full ring-2 ring-terracotta-500/40">
+        <div className="flex items-center gap-3.5 pb-4 border-b border-white/10">
+          <div className="relative h-14 w-14 overflow-hidden rounded-full ring-2 ring-terracotta-500/50">
             <Image
               src={reviewee.avatar_url}
               alt={reviewee.full_name}
@@ -93,11 +93,11 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
             />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="text-lg font-bold text-white">
               Endorse {reviewee.full_name}
             </h2>
-            <p className="text-xs text-gray-500 truncate max-w-xs font-medium">
-              Trip: <span className="text-terracotta-700 font-bold">{trip.title}</span>
+            <p className="text-xs text-cinema-400 truncate max-w-xs font-medium">
+              Trip: <span className="text-terracotta-400 font-bold">{trip.title}</span>
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
           {/* Star Rating Selection */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-2">
               Overall Travel Vibe Rating (1 to 5 Stars)
             </label>
             <div className="flex items-center gap-2">
@@ -124,14 +124,14 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
                       size={28}
                       className={`transition-colors ${
                         isFilled
-                          ? 'fill-amber-400 text-amber-500 filter drop-shadow-[0_1px_3px_rgba(245,158,11,0.3)]'
-                          : 'text-stone-300'
+                          ? 'fill-amber-400 text-amber-400 filter drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]'
+                          : 'text-cinema-700'
                       }`}
                     />
                   </button>
                 );
               })}
-              <span className="ml-3 text-sm font-extrabold text-amber-600">
+              <span className="ml-3 text-sm font-extrabold text-amber-400">
                 {hoverRating !== null ? hoverRating : rating}.0 Stars
               </span>
             </div>
@@ -139,10 +139,10 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
 
           {/* Badge Selection */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5 flex items-center gap-1.5">
-              <Sparkles size={14} className="text-amber-500" /> Endorse Community Badges
+            <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-1.5 flex items-center gap-1.5">
+              <Sparkles size={14} className="text-amber-400" /> Endorse Community Badges
             </label>
-            <p className="text-[11px] text-gray-500 mb-3">
+            <p className="text-[11px] text-cinema-400 mb-3">
               Select all behavioral tags that describe your travel experience with them:
             </p>
             <div className="flex flex-wrap gap-2">
@@ -164,7 +164,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
 
           {/* Feedback Comment */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-cinema-400 mb-2">
               Traveler Feedback & Memory
             </label>
             <textarea
@@ -172,7 +172,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="E.g., Great company on the trail, always woke up on time, kept the shared expense kitty spot on!"
-              className="w-full rounded-2xl border border-stone-200 bg-stone-50 p-4 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-terracotta-500 focus:bg-white focus:outline-none"
+              className="w-full rounded-2xl border border-white/10 bg-cinema-950 p-4 text-xs sm:text-sm text-white placeholder-cinema-500 focus:border-terracotta-500 focus:outline-none"
             />
           </div>
 
@@ -181,7 +181,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-2.5 text-xs font-bold text-gray-600 hover:bg-stone-100"
+              className="rounded-2xl border border-white/10 bg-cinema-850 px-5 py-2.5 text-xs font-bold text-cinema-300 hover:bg-cinema-800"
             >
               Cancel
             </button>
